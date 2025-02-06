@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudia tu Mercado - ADLF</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(to bottom, #FF0000, #8B0000); /* Rojo */
+            padding: 40px 20px;
+            border-radius: 10px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FFD700; /* Dorado */
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #ccc;
+        }
+        .image-section img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+        .benefits {
+            margin-top: 40px;
+        }
+        .benefits h2 {
+            font-size: 2rem;
+            color: #1E3A8A; /* Azul radiante */
+        }
+        .benefits ul {
+            list-style: none;
+            padding: 0;
+        }
+        .benefits li {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+        .form-container {
+            margin-top: 50px;
+            padding: 20px;
+            background: linear-gradient(to bottom, #1E3A8A, #000); /* Azul radiante a negro */
+            border-radius: 10px;
+        }
+        .form-container h2 {
+            font-size: 1.8rem;
+            color: #FFD700; /* Dorado */
+        }
+        .form-container input {
+            width: 90%;
+            padding: 12px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+        .form-container button {
+            background-color: #FF0000; /* Rojo */
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 90%;
+        }
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+        footer p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado -->
+        <header>
+            <h1>ESTUDIA TU MERCADO Y DOMINA EL MARKETING</h1>
+            <p>Descubre los aspectos clave para entender a tu consumidor y llevar tu salón al siguiente nivel</p>
+        </header>
+
+        <!-- Texto encima de la foto -->
+        <section class="image-section">
+            <h2>Convierte tu salón en un imperio de la belleza!</h2>
+            <img src="https://th.bing.com/th/id/OIP.IjnLKG0NBAAADAOilcL46AHaFP?w=1000&h=707&rs=1&pid=ImgDetMain" alt="Salón de belleza exitoso">
+        </section>
+
+        <!-- Beneficios -->
+        <section class="benefits">
+            <h2>¿Qué encontrarás en esta guía?</h2>
+            <ul>
+                <li>✅ Aprende a identificar los dolores ocultos de tus clientes y conectar con sus necesidades reales.</li>
+                <li>✅ Descubre cómo analizar a tu competencia para encontrar oportunidades únicas en el mercado.</li>
+                <li>✅ Implementa estrategias de marketing basadas en datos y tendencias actuales.</li>
+            </ul>
+        </section>
+
+        <!-- Formulario al final -->
+        <section class="form-container">
+            <h2>Descarga la Guía GRATIS Ahora</h2>
+            <form id="contactForm">
+                <input type="text" id="nombreSalon" name="nombreSalon" placeholder="Nombre de tu Salón *" required>
+                <input type="text" id="whatsapp" name="whatsapp" placeholder="Contacto de WhatsApp *" required>
+                <button type="submit">¡QUIERO MI GUÍA GRATIS!</button>
+            </form>
+        </section>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>© 2025 ADLF. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const botToken = '7609445234:AAHaIOs_atVGpS9dfD5VPpv5ohxW0dduMhQ';
+            const chatId = '929759981';
+
+            const nombreSalon = document.getElementById('nombreSalon').value.trim();
+            const whatsapp = document.getElementById('whatsapp').value.trim();
+
+            if (nombreSalon === "" || whatsapp === "") {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            const message = `📩 Nueva solicitud de guía gratuita\n🏢 Nombre del Salón: ${nombreSalon}\n📞 WhatsApp: ${whatsapp}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    alert('Información enviada con éxito. Descargando la guía...');
+                    window.location.href = 'https://drive.google.com/uc?export=download&id=1duSYL1z7Ok-pWOhJvVrHF3Tjx62h5CZb';
+                } else {
+                    alert('Error al enviar la información.');
+                    console.error(data);
+                }
+            })
+            .catch(error => {
+                alert('Error en la conexión. Intenta nuevamente.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
